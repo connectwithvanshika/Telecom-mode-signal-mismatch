@@ -20,10 +20,13 @@ class AnomalyDetector:
 
         mode = str(row[self.rules["network_mode_column"]]).upper()
 
-        rsrp = row[self.rules["rsrp_column"]]
-        rsrq = row[self.rules["rsrq_column"]]
-        sinr = row[self.rules["sinr_column"]]
-        signal_quality = row[self.rules["signal_quality_column"]]
+        rsrp = float(str(row[self.rules["rsrp_column"]]).replace("dBm", "").strip())
+
+        rsrq = float(str(row[self.rules["rsrq_column"]]).replace("dB", "").strip())
+
+        sinr = float(str(row[self.rules["sinr_column"]]).replace("dB", "").strip())
+
+        signal_quality = float(row[self.rules["signal_quality_column"]])
 
         thresholds = self.rules["thresholds"]
 
