@@ -21,11 +21,17 @@ def main():
 
     df = pd.read_csv(input_file)
 
-    print(f"Total records: {len(df)}")
+    # Clean column names
+    df.columns = df.columns.str.strip()
+
+    print("\nColumns in dataset:")
+    print(df.columns.tolist())
+
+    print(f"\nTotal records: {len(df)}")
 
     detector = AnomalyDetector(config)
 
-    print("Running anomaly detection...")
+    print("\nRunning anomaly detection...")
 
     result = detector.run(df)
 
@@ -33,7 +39,7 @@ def main():
 
     total_anomalies = result["Triggered Rules"].astype(bool).sum()
 
-    print("Detection completed successfully!")
+    print("\nDetection completed successfully!")
     print(f"Total anomalies detected: {total_anomalies}")
     print(f"Output saved to: {output_file}")
 
