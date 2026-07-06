@@ -1,0 +1,33 @@
+dataset:
+  input_file: data/telecom_data.csv
+  output_file: output/anomaly_report.csv
+
+mode_signal_mismatch:
+
+  enabled: true
+
+  network_mode_column: NetworkMode
+  rsrp_column: RSRP
+  rsrq_column: RSRQ
+  sinr_column: SINR
+  rssi_column: RSSI
+  signal_quality_column: SIGNAL_QUALITY
+
+  thresholds:
+
+    LTE:
+      rsrp_min: -120
+      rsrq_min: -20
+      sinr_min: 0
+      signal_quality_min: 20
+
+    NR5G:
+      rsrp_min: -125
+      sinr_min: -3
+      signal_quality_min: 20
+
+  anomaly_name: MODE_SIGNAL_MISMATCH
+
+  description: >
+    Detects devices whose reported network mode is inconsistent
+    with the observed signal quality metrics.
